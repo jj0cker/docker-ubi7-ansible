@@ -1,5 +1,5 @@
-FROM centos:7
-LABEL maintainer="Jeff Geerling"
+FROM registry.access.redhat.com/ubi7/ubi:latest
+LABEL maintainer="jj0cker"
 ENV container=docker
 
 ENV pip_packages "ansible"
@@ -15,14 +15,18 @@ rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
 rm -f /lib/systemd/system/basic.target.wants/*;\
 rm -f /lib/systemd/system/anaconda.target.wants/*;
 
+# Enable epel repository
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+ && yum clean all
+
 # Install requirements.
 RUN yum makecache fast \
- && yum -y install deltarpm epel-release initscripts \
+ && yum -y install initscripts \
  && yum -y update \
  && yum -y install \
       sudo \
       which \
-      python-pip \
+      python2-pip \
  && yum clean all
 
 # Install Ansible via Pip.
