@@ -1,7 +1,5 @@
 # UBI 7 Ansible Test Image
 
-[![Docker Automated build]](https://hub.docker.com/r/jj0cker/docker-ubi7-ansible/)
-
 UBI 7 Docker container for Ansible playbook and role testing.
 
 ## Tags
